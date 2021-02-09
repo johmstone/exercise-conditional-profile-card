@@ -29,18 +29,53 @@ function render(variables = {}) {
   let cover = `<div class="cover"><img src="${variables.background}" /></div>`;
   if (variables.includeCover == false) cover = "<div class='cover'></div>";
 
+  let pFullName = "Lucy Boilet";
+  if (variables.name != null || variables.lastname != null) {
+    pFullName =
+      (variables.name ? variables.name : "") +
+      " " +
+      (variables.lastname ? variables.lastname : "");
+  }
+
+  let smPosition = "position-left";
+  let smHidden = "hidden";
+
+  if (variables.socialMediaPosition != null) {
+    smHidden = "visible";
+    smPosition = variables.socialMediaPosition;
+  }
+
+  let pRole = variables.role ? variables.role : "Web Developer";
+
+  let pCity = variables.city ? variables.city : "Miami";
+
+  let pCountry = variables.country ? variables.country : "USA";
+
+  let pTwitter = variables.twitter
+    ? variables.twitter
+    : "https://twitter.com/alesanchezr";
+  let pGithub = variables.github
+    ? variables.github
+    : "https://github.com/alesanchezr";
+  let pLinkedIn = variables.linkedin
+    ? variables.linkedin
+    : "https://linkedin.com/alesanchezr";
+  let pInstagram = variables.instagram
+    ? variables.instagram
+    : "https://instagram.com/alesanchezr";
+
   // reset the website body with the new html output
   document.querySelector("#widget_content").innerHTML = `<div class="widget">
             ${cover}
           <img src="${variables.avatarURL}" class="photo" />
-          <h1>Lucy Boilett</h1>
-          <h2>Web Developer</h2>
-          <h3>Miami, USA</h3>
-          <ul class="position-right">
-            <li><a href="https://twitter.com/alesanchezr"><i class="fa fa-twitter"></i></a></li>
-            <li><a href="https://github.com/alesanchezr"><i class="fa fa-github"></i></a></li>
-            <li><a href="https://linkedin.com/alesanchezr"><i class="fa fa-linkedin"></i></a></li>
-            <li><a href="https://instagram.com/alesanchezr"><i class="fa fa-instagram"></i></a></li>
+          <h1>${pFullName}</h1>
+          <h2>${pRole}</h2>
+          <h3>${pCity}, ${pCountry}</h3>
+          <ul class="${smPosition}" style="visibility: ${smHidden};">
+            <li><a href="${pTwitter}"><i class="fa fa-twitter"></i></a></li>
+            <li><a href="${pGithub}"><i class="fa fa-github"></i></a></li>
+            <li><a href="${pLinkedIn}"><i class="fa fa-linkedin"></i></a></li>
+            <li><a href="${pInstagram}"><i class="fa fa-instagram"></i></a></li>
           </ul>
         </div>
     `;
@@ -58,7 +93,7 @@ window.onload = function() {
     // this is the url for the profile avatar
     avatarURL: "https://randomuser.me/api/portraits/women/42.jpg",
     // social media bar position (left or right)
-    socialMediaPosition: "position-left",
+    socialMediaPosition: null,
     // social media usernames
     twitter: null,
     github: "alesanchezr",
